@@ -1,8 +1,11 @@
 ---
 title: "Dwd SPI"
-author: "Michael Kahle"
+author: "Kmicha71"
 date: "6 8 2019"
-output: html_document
+output:
+  html_document: 
+    keep_md: true
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
