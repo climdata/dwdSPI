@@ -1,0 +1,73 @@
+---
+title: "Dwd SPI"
+author: "Michael Kahle"
+date: "6 8 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## DWD SPI
+
+First download the precipitation data from dwd (monthly & regional summary)
+
+
+```{sh downloads}
+
+for month in "01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12"
+do
+ file="regional_averages_rr_$month.txt"
+ echo "Download file: $file"
+ [ -f ./download/$file ] && mv -f ./download/$file ./download/$file.bck
+ wget -q -P download https://opendata.dwd.de/climate_environment/CDC/regional_averages_DE/monthly/precipitation/$file
+ ## Remove first line !!
+ tail -n +2 ./download/$file > ./download/$file.tmp && mv ./download/$file.tmp ./download/$file
+done
+```
+
+
+```{r spi}
+#install.packages("SCI")
+require("SCI")
+
+prec <- read.csv("./download/regional_averages_rr_01.txt", sep=";")
+
+for (month in c("02","03","04","05","06","07","08","09","10","11","12")){
+  file <- paste("./download/regional_averages_rr_", month, ".txt", sep="")
+  print(paste("Reading file:", file))
+  tmp <- read.csv(file, sep=";")
+  prec <- rbind(prec, tmp)
+}
+prec <- prec[order(prec$Jahr, prec$Monat),]
+spi <-  data.frame(prec$Jahr, prec$Monat)
+names(spi)[names(spi) == "prec.Jahr"] <- "year"
+names(spi)[names(spi) == "prec.Monat"] <- "month"
+spi$time <- signif(spi$year + (spi$month-1)/12, digits=6)
+
+start <- prec$Monat[1]
+for (m in c(1,2,3,4,5,6,7,8,9,10,11,12)) {
+  tmp.para <- fitSCI(prec$Deutschland, first.mon=start,distr="gamma",time.scale=m,p0=TRUE)
+  tmp.spi <- transformSCI(prec$Deutschland,first.mon=start,obj=tmp.para)
+  spi$new <- signif(tmp.spi, digits=6)
+  names(spi)[names(spi) == "new"] <- paste("spi", m, sep="")
+}
+
+write.table(spi, file = "spi_de.csv", append = FALSE, quote = TRUE, sep = ",",
+            eol = "\n", na = "NA", dec = ".", row.names = FALSE,
+            col.names = TRUE, qmethod = "escape", fileEncoding = "UTF-8")
+```
+
+
+
+
+## Plot Drought time line
+
+```{r plot, echo=TRUE}
+ plot(spi$year,spi$spi12,t="l")
+```
+
+
+
+
