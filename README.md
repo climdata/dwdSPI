@@ -139,7 +139,7 @@ for (m in c(1,2,3,4,5,6,7,8,9,10,11,12)) {
   names(spi)[names(spi) == "new"] <- paste("spi", m, sep="")
 }
 
-write.table(spi, file = "spi_de.csv", append = FALSE, quote = TRUE, sep = ",",
+write.table(spi, file = "csv/spi_de.csv", append = FALSE, quote = TRUE, sep = ",",
             eol = "\n", na = "NA", dec = ".", row.names = FALSE,
             col.names = TRUE, qmethod = "escape", fileEncoding = "UTF-8")
 ```
