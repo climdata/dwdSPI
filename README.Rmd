@@ -26,7 +26,8 @@ prec <- prec[order(prec$time),]
 spi <-  data.frame(prec$year, prec$month)
 names(spi)[names(spi) == "prec.year"] <- "year"
 names(spi)[names(spi) == "prec.month"] <- "month"
-spi$time <- signif(spi$year + (spi$month-0.5)/12, digits=6)
+spi$ts <- signif(spi$year + (spi$month-0.5)/12, digits=6)
+spi$time <- paste(spi$year,spi$month, '15 00:00:00', sep='-')
 
 start <- prec$month[1]
 for (m in c(1,2,3,4,5,6,7,8,9,10,11,12)) {
@@ -48,9 +49,9 @@ write.table(spi, file = "csv/spi_de.csv", append = FALSE, quote = TRUE, sep = ",
 
 ```{r plot, echo=TRUE}
 require("ggplot2")
-spi <- read.csv("./csv/spi_de.csv", sep=",")
+#spi <- read.csv("./csv/spi_de.csv", sep=",")
 mp <- ggplot() +
-      geom_line(aes(y=spi$spi12, x=spi$time), color="blue") +
+      geom_line(aes(y=spi$spi12, x=spi$ts), color="blue") +
       xlab("Year") + ylab("SPI12 []")
 mp
 ```

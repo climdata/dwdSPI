@@ -25,7 +25,15 @@ require("SCI")
 ```
 
 ```
+## Warning: package 'SCI' was built under R version 3.5.3
+```
+
+```
 ## Loading required package: fitdistrplus
+```
+
+```
+## Warning: package 'fitdistrplus' was built under R version 3.5.3
 ```
 
 ```
@@ -41,11 +49,23 @@ require("SCI")
 ```
 
 ```
+## Warning: package 'npsurv' was built under R version 3.5.2
+```
+
+```
 ## Loading required package: lsei
 ```
 
 ```
+## Warning: package 'lsei' was built under R version 3.5.2
+```
+
+```
 ## Loading required package: lmomco
+```
+
+```
+## Warning: package 'lmomco' was built under R version 3.5.3
 ```
 
 ```r
@@ -55,7 +75,8 @@ prec <- prec[order(prec$time),]
 spi <-  data.frame(prec$year, prec$month)
 names(spi)[names(spi) == "prec.year"] <- "year"
 names(spi)[names(spi) == "prec.month"] <- "month"
-spi$time <- signif(spi$year + (spi$month-0.5)/12, digits=6)
+spi$ts <- signif(spi$year + (spi$month-0.5)/12, digits=6)
+spi$time <- paste(spi$year,spi$month, '15 00:00:00', sep='-')
 
 start <- prec$month[1]
 for (m in c(1,2,3,4,5,6,7,8,9,10,11,12)) {
@@ -84,16 +105,20 @@ require("ggplot2")
 ## Loading required package: ggplot2
 ```
 
+```
+## Warning: package 'ggplot2' was built under R version 3.5.3
+```
+
 ```r
-spi <- read.csv("./csv/spi_de.csv", sep=",")
+#spi <- read.csv("./csv/spi_de.csv", sep=",")
 mp <- ggplot() +
-      geom_line(aes(y=spi$spi12, x=spi$time), color="blue") +
+      geom_line(aes(y=spi$spi12, x=spi$ts), color="blue") +
       xlab("Year") + ylab("SPI12 []")
 mp
 ```
 
 ```
-## Warning: Removed 11 rows containing missing values (geom_path).
+## Warning: Removed 8 rows containing missing values (geom_path).
 ```
 
 ![](README_files/figure-html/plot-1.png)<!-- -->
