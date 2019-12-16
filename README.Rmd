@@ -22,7 +22,7 @@ require("SCI")
 
 prec <- read.csv("https://raw.githubusercontent.com/climdata/dwdPrecipitation/master/csv/monthly_precipitation_de.csv", sep=",")
 
-prec <- prec[order(prec$time),]
+prec <- prec[order(prec$ts),]
 spi <-  data.frame(prec$year, prec$month)
 names(spi)[names(spi) == "prec.year"] <- "year"
 names(spi)[names(spi) == "prec.month"] <- "month"

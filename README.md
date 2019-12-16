@@ -71,7 +71,7 @@ require("SCI")
 ```r
 prec <- read.csv("https://raw.githubusercontent.com/climdata/dwdPrecipitation/master/csv/monthly_precipitation_de.csv", sep=",")
 
-prec <- prec[order(prec$time),]
+prec <- prec[order(prec$ts),]
 spi <-  data.frame(prec$year, prec$month)
 names(spi)[names(spi) == "prec.year"] <- "year"
 names(spi)[names(spi) == "prec.month"] <- "month"
@@ -118,7 +118,7 @@ mp
 ```
 
 ```
-## Warning: Removed 8 rows containing missing values (geom_path).
+## Warning: Removed 11 rows containing missing values (geom_path).
 ```
 
 ![](README_files/figure-html/plot-1.png)<!-- -->
