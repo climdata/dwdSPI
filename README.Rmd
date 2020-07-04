@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Use downloaded and converted precipitation data from DWD (monthly & regional summary)
 
 ```{r spi}
-#install.packages("SCI")
+#install.packages("SCI")   # MAAS, Matrix, 
 require("SCI")
 
 prec <- read.csv("https://raw.githubusercontent.com/climdata/dwdPrecipitation/master/csv/monthly_precipitation_de.csv", sep=",")

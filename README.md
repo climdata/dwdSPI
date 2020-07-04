@@ -16,7 +16,7 @@ Use downloaded and converted precipitation data from DWD (monthly & regional sum
 
 
 ```r
-#install.packages("SCI")
+#install.packages("SCI")   # MAAS, Matrix, 
 require("SCI")
 ```
 
@@ -25,15 +25,7 @@ require("SCI")
 ```
 
 ```
-## Warning: package 'SCI' was built under R version 3.5.3
-```
-
-```
 ## Loading required package: fitdistrplus
-```
-
-```
-## Warning: package 'fitdistrplus' was built under R version 3.5.3
 ```
 
 ```
@@ -49,23 +41,11 @@ require("SCI")
 ```
 
 ```
-## Warning: package 'npsurv' was built under R version 3.5.2
-```
-
-```
 ## Loading required package: lsei
 ```
 
 ```
-## Warning: package 'lsei' was built under R version 3.5.2
-```
-
-```
 ## Loading required package: lmomco
-```
-
-```
-## Warning: package 'lmomco' was built under R version 3.5.3
 ```
 
 ```r
@@ -103,10 +83,6 @@ require("ggplot2")
 
 ```
 ## Loading required package: ggplot2
-```
-
-```
-## Warning: package 'ggplot2' was built under R version 3.5.3
 ```
 
 ```r
