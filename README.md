@@ -25,7 +25,15 @@ require("SCI")
 ```
 
 ```
+## Warning: package 'SCI' was built under R version 3.5.3
+```
+
+```
 ## Loading required package: fitdistrplus
+```
+
+```
+## Warning: package 'fitdistrplus' was built under R version 3.5.3
 ```
 
 ```
@@ -37,7 +45,15 @@ require("SCI")
 ```
 
 ```
+## Warning: package 'survival' was built under R version 3.5.3
+```
+
+```
 ## Loading required package: npsurv
+```
+
+```
+## Warning: package 'npsurv' was built under R version 3.5.2
 ```
 
 ```
@@ -45,7 +61,15 @@ require("SCI")
 ```
 
 ```
+## Warning: package 'lsei' was built under R version 3.5.2
+```
+
+```
 ## Loading required package: lmomco
+```
+
+```
+## Warning: package 'lmomco' was built under R version 3.5.3
 ```
 
 ```r
@@ -83,6 +107,10 @@ require("ggplot2")
 
 ```
 ## Loading required package: ggplot2
+```
+
+```
+## Warning: package 'ggplot2' was built under R version 3.5.3
 ```
 
 ```r
