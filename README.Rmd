@@ -67,12 +67,13 @@ spinew <- spinew[, c("year","month","ts","time","spi1")]
 names(spinew)[names(spinew) == 'spi1'] <- 'pi'
 spinew <- spinew[order(spinew$ts),]
 ### Limit range
-for(i in length(spinew$pi)) {
+for(i in 1:nrow(spinew)) {
   if(spinew$pi[i] > 3.0) {
-    spinew$pi[i] = 3.0
+    spinew$pi[i] <- 3.0
   }
   if(spinew$pi[i] < -3.0) {
-    spinew$pi[i] = -3.0
+    print(i)
+    spinew$pi[i] <- -3.0
   }  
 }
 spinew$pi <- round(spinew$pi)

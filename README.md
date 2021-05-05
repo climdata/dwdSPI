@@ -25,15 +25,7 @@ require("SCI")
 ```
 
 ```
-## Warning: package 'SCI' was built under R version 3.5.3
-```
-
-```
 ## Loading required package: fitdistrplus
-```
-
-```
-## Warning: package 'fitdistrplus' was built under R version 3.5.3
 ```
 
 ```
@@ -45,31 +37,7 @@ require("SCI")
 ```
 
 ```
-## Warning: package 'survival' was built under R version 3.5.3
-```
-
-```
-## Loading required package: npsurv
-```
-
-```
-## Warning: package 'npsurv' was built under R version 3.5.2
-```
-
-```
-## Loading required package: lsei
-```
-
-```
-## Warning: package 'lsei' was built under R version 3.5.2
-```
-
-```
 ## Loading required package: lmomco
-```
-
-```
-## Warning: package 'lmomco' was built under R version 3.5.3
 ```
 
 ```r
@@ -109,10 +77,6 @@ require("ggplot2")
 ## Loading required package: ggplot2
 ```
 
-```
-## Warning: package 'ggplot2' was built under R version 3.5.3
-```
-
 ```r
 #spi <- read.csv("./csv/spi_de.csv", sep=",")
 mp <- ggplot() +
@@ -122,11 +86,55 @@ mp
 ```
 
 ```
-## Warning: Removed 11 rows containing missing values (geom_path).
+## Warning: Removed 11 row(s) containing missing values (geom_path).
 ```
 
 ![](README_files/figure-html/plot-1.png)<!-- -->
+## Expand historical PI serie
 
+
+```r
+precCompl <- read.csv("https://raw.githubusercontent.com/climdata/glaser2019/master/csv/pi_1500_2xxx_monthly.csv", sep=",", na = "NA")
+#precFull <- precCompl[,c("year","month","pi")]
+
+spinew <- subset(spi, spi$year>=1882)
+spinew <- spinew[, c("year","month","ts","time","spi1")]
+names(spinew)[names(spinew) == 'spi1'] <- 'pi'
+spinew <- spinew[order(spinew$ts),]
+### Limit range
+for(i in 1:nrow(spinew)) {
+  if(spinew$pi[i] > 3.0) {
+    spinew$pi[i] <- 3.0
+  }
+  if(spinew$pi[i] < -3.0) {
+    print(i)
+    spinew$pi[i] <- -3.0
+  }  
+}
+```
+
+```
+## [1] 61
+## [1] 108
+## [1] 136
+## [1] 322
+## [1] 933
+## [1] 1369
+## [1] 1504
+## [1] 1559
+```
+
+```r
+spinew$pi <- round(spinew$pi)
+precCompl <- subset(precCompl, precCompl$ts<min(spinew$ts))
+
+p1 <- rbind(precCompl, spinew)
+p1 <- p1[order(p1$ts),]
+
+write.table(p1, file = "csv/hpi_de.csv", append = FALSE, quote = TRUE, sep = ",",
+            eol = "\n", na = "NA", dec = ".", row.names = FALSE,
+            col.names = TRUE, qmethod = "escape", fileEncoding = "UTF-8")
+```
 
 
 
