@@ -55,7 +55,37 @@ mp <- ggplot() +
       xlab("Year") + ylab("SPI12 []")
 mp
 ```
+## Expand historical PI serie
 
+```{r historical PI, echo=TRUE}
+
+precCompl <- read.csv("https://raw.githubusercontent.com/climdata/glaser2019/master/csv/pi_1500_2xxx_monthly.csv", sep=",", na = "NA")
+#precFull <- precCompl[,c("year","month","pi")]
+
+spinew <- subset(spi, spi$year>=1882)
+spinew <- spinew[, c("year","month","ts","time","spi1")]
+names(spinew)[names(spinew) == 'spi1'] <- 'pi'
+spinew <- spinew[order(spinew$ts),]
+### Limit range
+for(i in length(spinew$pi)) {
+  if(spinew$pi[i] > 3.0) {
+    spinew$pi[i] = 3.0
+  }
+  if(spinew$pi[i] < -3.0) {
+    spinew$pi[i] = -3.0
+  }  
+}
+spinew$pi <- round(spinew$pi)
+precCompl <- subset(precCompl, precCompl$ts<min(spinew$ts))
+
+p1 <- rbind(precCompl, spinew)
+p1 <- p1[order(p1$ts),]
+
+write.table(p1, file = "csv/hpi_de.csv", append = FALSE, quote = TRUE, sep = ",",
+            eol = "\n", na = "NA", dec = ".", row.names = FALSE,
+            col.names = TRUE, qmethod = "escape", fileEncoding = "UTF-8")
+
+```
 
 
 
