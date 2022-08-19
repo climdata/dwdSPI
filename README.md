@@ -86,7 +86,7 @@ mp
 ```
 
 ```
-## Warning: Removed 11 row(s) containing missing values (geom_path).
+## Warning: Removed 11 rows containing missing values (geom_path).
 ```
 
 ![](README_files/figure-html/plot-1.png)<!-- -->
@@ -118,6 +118,8 @@ for(i in 1:nrow(spinew)) {
 ## [1] 108
 ## [1] 136
 ## [1] 322
+## [1] 356
+## [1] 788
 ## [1] 933
 ## [1] 1369
 ## [1] 1504
