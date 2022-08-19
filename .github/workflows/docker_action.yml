@@ -26,9 +26,8 @@ jobs:
       - uses: actions/checkout@v3
 #        with:
 #          ref: master
-##      - name: Install pandoc
-##        run: (apt-get -y --no-install-recommends install pandoc) 
-
+      - name: Install liblapack-dev
+        run: (apt-get -y --no-install-recommends install liblapack-dev) 
       - name: Install RcppArmadillo
         run: (R -e "install.packages('RcppArmadillo')")
       - name: Install Lmoments
