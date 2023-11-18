@@ -15,7 +15,7 @@ jobs:
   docker-run-action:
     runs-on: ubuntu-latest
     container:
-      image: tamboraorg/crecoding:2020.0
+      image: credocker/crecoding:2020.0
       env:
         NODE_ENV: development
       ports:
@@ -30,8 +30,8 @@ jobs:
           chown -R $(id -u):$(id -g) $PWD
 #        with:
 #          ref: master
-      - name: Install liblapack-dev gfortran
-        run: (apt-get -y --no-install-recommends install liblapack-dev gfortran) 
+##      - name: Install liblapack-dev gfortran
+##        run: (apt-get -y --no-install-recommends install liblapack-dev gfortran) 
 ##      - name: Install RcppArmadillo
 ##        run: (R -e "install.packages('RcppArmadillo')")
 ##      - name: Install Lmoments
