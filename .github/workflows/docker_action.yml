@@ -32,8 +32,12 @@ jobs:
 #          ref: master
 ##      - name: Install liblapack-dev gfortran
 ##        run: (apt-get -y --no-install-recommends install liblapack-dev gfortran) 
+
       - name: Install RcppArmadillo
-        run: (R -e "install.packages('RcppArmadillo')")
+        run: (add-apt-repository --enable-source --yes "ppa:c2d4u.team/c2d4u4.0+"; apt install r-cran-rcpparmadillo) 
+
+##      - name: Install RcppArmadillo
+##        run: (R -e "install.packages('RcppArmadillo')")
 ##      - name: Install Lmoments
 ##        run: (R -e "install.packages('Lmoments')")
 ##      - name: Install lmomco
