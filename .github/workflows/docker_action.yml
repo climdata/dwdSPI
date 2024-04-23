@@ -32,12 +32,14 @@ jobs:
 #          ref: master
 ##      - name: Install liblapack-dev gfortran
 ##        run: (apt-get -y --no-install-recommends install liblapack-dev gfortran) 
-##      - name: Install RcppArmadillo
-##        run: (R -e "install.packages('RcppArmadillo')")
+      - name: Install RcppArmadillo
+        run: (R -e "install.packages('RcppArmadillo')")
 ##      - name: Install Lmoments
 ##        run: (R -e "install.packages('Lmoments')")
 ##      - name: Install lmomco
 ##        run: (R -e "install.packages('lmomco')")
+
+
 
       - name: Install SCI
         run: (R -e "install.packages('SCI')")
